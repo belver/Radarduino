@@ -3,9 +3,9 @@
  * Radar implementado con arduino y controlado por un servidor web
  * 
  * Autores:
- * Belver Prieto, Manuel
- * Maseli Martín, Vanesa
- * Santiago Corral, María
+ * Belver, Manuel
+ * Maseli, Vanesa
+ * Santiago, María
  */
 
 //LCD library
@@ -269,17 +269,16 @@ void checkWifi(){
   }
   if (http_request!=""){ //Si termina con un salto de linea
     Serial.println(http_request);
-      if (http_request.length()<35){ //+IPD,0,379:GET / HTTP/1.1
-        Serial.println("Enviada Web Request");
-        webserver();
-        delay(500);
-      }
-      else{                          //+IPD,0,418:GET /?maxspeed=120&distance=1000&encendido=1 HTTP/1.1
-        Serial.println(http_request);
-        Serial.println("Recibida respuesta de formulario");
-        parser(http_request);
-        webserver();
-      }
+    if (http_request.length()<35){ //+IPD,0,379:GET / HTTP/1.1
+      Serial.println("Enviada Web Request");
+      webserver();
+    }
+    else{                          //+IPD,0,418:GET /?maxspeed=120&distance=1000&encendido=1 HTTP/1.1
+      Serial.println(http_request);
+      Serial.println("Recibida respuesta de formulario");
+      parser(http_request);
+      webserver();
+    }
     http_request="";
     Serial.println("---------------------------");
   }
